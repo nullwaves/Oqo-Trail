@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class EventTrigger : MonoBehaviour
 {
+    public GameObject ShopText;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -18,6 +20,15 @@ public class EventTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Shopkeeper"){ 
+            ShopText.SetActive(true);
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Shopkeeper"){
+            ShopText.SetActive(false);
+        }
     }
 }
