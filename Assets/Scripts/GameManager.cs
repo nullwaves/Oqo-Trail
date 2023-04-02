@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public int Tongues = 0;
 
     public Rationing Rations = Rationing.Filling;
-    public Pacing Pace = Pacing.Steady;
+    public float Pace = Pacing.Steady;
 
     public enum Rationing
     {
@@ -25,11 +25,37 @@ public class GameManager : MonoBehaviour
         Filling = 3,
     }
 
-    public enum Pacing
+    public static class Pacing
     {
-        Steady = 2,
-        Strenuous = 4,
-        Grueling = 8,
+        public const float Steady = 2;
+        public const float Strenuous = 4;
+        public const float Grueling = 8;
+    }
+
+    public void IncreasePace()
+    {
+        switch(Pace)
+        {
+            case Pacing.Strenuous: Pace = Pacing.Grueling;
+                break;
+            case Pacing.Steady: Pace = Pacing.Strenuous;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void DecreasePace()
+    {
+        switch(Pace)
+        {
+            case Pacing.Strenuous: Pace = Pacing.Steady;
+                break;
+            case Pacing.Grueling: Pace = Pacing.Strenuous;
+                break;
+            default:
+                break;
+        }
     }
 
     // Start is called before the first frame update
