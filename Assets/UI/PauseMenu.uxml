@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-basis: 100%; justify-content: center; align-items: center; opacity: 1; display: flex; visibility: visible; overflow: visible; background-color: rgba(255, 255, 255, 0);">
+        <ui:VisualElement name="Container" style="align-items: center; background-color: rgba(100, 0, 130, 255); border-left-color: rgba(11, 3, 195, 255); border-right-color: rgba(11, 3, 195, 255); border-top-color: rgba(11, 3, 195, 255); border-bottom-color: rgba(11, 3, 195, 255); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 5%; border-bottom-left-radius: 5%; border-top-right-radius: 5%; border-bottom-right-radius: 5%;">
+            <ui:Label text="Paused" display-tooltip-when-elided="true" />
+            <ui:RadioButtonGroup label="Rationing" value="0" name="Rations" choices="Filling,Meager,Bare-Bones" />
+            <ui:RadioButtonGroup label="Pacing" value="0" name="Pacing" choices="Steady,Strenuous,Grueling" />
+            <ui:Button text="Resume" display-tooltip-when-elided="true" name="btnResume" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

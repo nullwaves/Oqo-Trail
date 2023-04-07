@@ -4,7 +4,18 @@ public class GameManager : MonoBehaviour
 {
     public OqoDateTime GameTime;
     public float GameTimeSpeed = 10f;
-    public bool IsPaused = false;
+    private bool _paused = false;
+    public bool IsPaused { 
+        get 
+        { 
+            return _paused;
+        }
+        set
+        {
+            _paused = value;
+            PauseStateChange?.Invoke(_paused);
+        }
+    }
 
     // Supplies
     public int Woqaz = 0;
@@ -78,7 +89,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.LogError($"Time: {GameTime}");
     }
+
+    public event BoolEventHandler PauseStateChange;
 }
+
+public delegate void BoolEventHandler(bool state);
 
 public class PartyMember
 {
