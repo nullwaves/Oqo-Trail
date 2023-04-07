@@ -1,10 +1,25 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-basis: 100%; justify-content: center; align-items: center; opacity: 1; display: flex; visibility: visible; overflow: visible; background-color: rgba(255, 255, 255, 0);">
-        <ui:VisualElement name="Container" style="align-items: center; background-color: rgba(100, 0, 130, 255); border-left-color: rgba(11, 3, 195, 255); border-right-color: rgba(11, 3, 195, 255); border-top-color: rgba(11, 3, 195, 255); border-bottom-color: rgba(11, 3, 195, 255); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 5%; border-bottom-left-radius: 5%; border-top-right-radius: 5%; border-bottom-right-radius: 5%;">
-            <ui:Label text="Paused" display-tooltip-when-elided="true" />
-            <ui:RadioButtonGroup label="Rationing" value="0" name="Rations" choices="Filling,Meager,Bare-Bones" />
-            <ui:RadioButtonGroup label="Pacing" value="0" name="Pacing" choices="Steady,Strenuous,Grueling" />
-            <ui:Button text="Resume" display-tooltip-when-elided="true" name="btnResume" />
+    <Style src="project://database/Assets/UI/stylesheets/pausemenu.uss?fileID=7433441132597879392&amp;guid=bff7bf2079ba53145af7967ba81376a7&amp;type=3#pausemenu" />
+    <ui:VisualElement style="flex-basis: 100%; justify-content: center; align-items: center; opacity: 1; display: flex; visibility: visible; overflow: visible; background-color: rgba(255, 255, 255, 0); -unity-font: initial; -unity-font-definition: url(&apos;project://database/Assets/UI/CatCafe%20SDF.asset?fileID=11400000&amp;guid=c8fb4512df5d09a46ba296b3a5dac480&amp;type=2#CatCafe SDF&apos;);">
+        <ui:VisualElement name="Container" style="align-items: center; background-color: rgb(100, 0, 130); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 5%; border-bottom-left-radius: 5%; border-top-right-radius: 5%; border-bottom-right-radius: 5%; -unity-font: url(&apos;project://database/Assets/UI/CatCafe.ttf?fileID=12800000&amp;guid=ea9a1db7c5b03194aa1f9fb14bb8b126&amp;type=3#CatCafe&apos;); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+            <ui:Label text="Paused" display-tooltip-when-elided="true" style="font-size: 48px; -unity-font-style: bold; white-space: nowrap; -unity-font: url(&apos;project://database/Assets/UI/CatCafe.ttf?fileID=12800000&amp;guid=ea9a1db7c5b03194aa1f9fb14bb8b126&amp;type=3#CatCafe&apos;);" />
+            <ui:VisualElement style="width: auto; flex-direction: column; align-items: center; border-bottom-width: 5px;">
+                <ui:Label text="Pacing:" display-tooltip-when-elided="true" class="pauseMenuTitle" style="-unity-text-align: middle-left; font-size: 36px;" />
+                <ui:VisualElement style="align-items: center; width: 418px; justify-content: space-around; height: 121px; flex-direction: row; border-bottom-width: 5px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+                    <ui:Button text="Steady" display-tooltip-when-elided="true" name="btnSteady" class="pauseMenuButton" style="overflow: visible; flex-direction: row; align-items: center; flex-basis: auto; font-size: 24px;" />
+                    <ui:Button text="Strenuous" display-tooltip-when-elided="true" name="btnStrenuous" class="pauseMenuButton" style="align-items: center; -unity-text-align: middle-center; white-space: nowrap; flex-direction: row; font-size: 24px; color: rgb(0, 0, 0);" />
+                    <ui:Button text="Grueling" display-tooltip-when-elided="true" name="btnGrueling" enable-rich-text="false" class="pauseMenuButton" style="align-items: center; flex-direction: row; font-size: 24px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement style="width: auto; flex-direction: column; align-items: center;">
+                <ui:Label text="Rations:" display-tooltip-when-elided="true" class="pauseMenuTitle" style="-unity-text-align: middle-left;" />
+                <ui:VisualElement style="align-items: center; width: 418px; justify-content: space-around; height: 121px; flex-direction: row;">
+                    <ui:Button text="Steady" display-tooltip-when-elided="true" name="btnFilling" class="pauseMenuButton" style="overflow: visible; flex-direction: column; align-items: center; flex-basis: auto;" />
+                    <ui:Button text="Meager" display-tooltip-when-elided="true" name="btnMeager" class="pauseMenuButton" style="align-items: center; -unity-text-align: middle-center; white-space: nowrap;" />
+                    <ui:Button text="Bare-bones" display-tooltip-when-elided="true" name="btnBarebones" class="pauseMenuButton" style="align-items: center;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button text="Resume" display-tooltip-when-elided="true" name="btnResume" class="pauseMenuButton" style="background-color: rgb(99, 99, 99); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

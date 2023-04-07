@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private CharMove player;
+
     // Supplies
     public int Woqaz = 0;
     public int Clothing = 0;
@@ -26,52 +28,50 @@ public class GameManager : MonoBehaviour
     public int Wheels = 0;
     public int Tongues = 0;
 
-    public Rationing Rations = Rationing.Filling;
-    public float Pace = Pacing.Steady;
-
-    public enum Rationing
+    private Rationing _rations;
+    public Rationing Rations 
     {
-        Barebones = 1,
-        Meager = 2,
-        Filling = 3,
+        get 
+        {
+            return _rations; 
+        } 
+        set 
+        { 
+            _rations = value;
+        }
     }
-
-    public static class Pacing
+    private Pacing _pace;
+    public Pacing Pace
     {
-        public const float Steady = 2;
-        public const float Strenuous = 4;
-        public const float Grueling = 8;
+        get
+        {
+            return _pace;
+        }
+        set 
+        { 
+            _pace = value;
+            player.playerSpeed = _pace.Speed;
+        }
     }
 
     public void IncreasePace()
     {
-        switch(Pace)
-        {
-            case Pacing.Strenuous: Pace = Pacing.Grueling;
-                break;
-            case Pacing.Steady: Pace = Pacing.Strenuous;
-                break;
-            default:
-                break;
-        }
+        if(Pace == Pacing.Strenuous) Pace = Pacing.Grueling;
+        if(Pace == Pacing.Steady) Pace = Pacing.Strenuous;
     }
 
     public void DecreasePace()
     {
-        switch(Pace)
-        {
-            case Pacing.Strenuous: Pace = Pacing.Steady;
-                break;
-            case Pacing.Grueling: Pace = Pacing.Strenuous;
-                break;
-            default:
-                break;
-        }
+        if (Pace == Pacing.Strenuous) Pace = Pacing.Steady;
+        if (Pace == Pacing.Grueling) Pace = Pacing.Strenuous;
     }
 
     // Start is called before the first frame update
     private void Start()
     {
+        player = FindObjectOfType<CharMove>();
+        Rations = Rationing.Filling;
+        Pace = Pacing.Steady;
         GameTime = new OqoDateTime(8 * OqoDateTime.MinutesPerHour);
         GameTime.HoursAdvanced += HoursAdvanced;
     }
@@ -94,6 +94,26 @@ public class GameManager : MonoBehaviour
 }
 
 public delegate void BoolEventHandler(bool state);
+
+public class Pacing
+{
+    public string Name;
+    public float Speed;
+
+    public static Pacing Steady = new Pacing() { Name = "Steady", Speed = 2 };
+    public static Pacing Strenuous = new Pacing() { Name = "Strenuous", Speed = 4 };
+    public static Pacing Grueling = new Pacing() { Name = "Grueling", Speed = 8 };
+}
+
+public class Rationing
+{
+    public string Name;
+    public int Consumption;
+
+    public static Rationing Filling = new Rationing() { Name = "Filling", Consumption = 3 };
+    public static Rationing Meager = new Rationing() { Name = "Meager", Consumption = 2 };
+    public static Rationing Barebones = new Rationing() { Name = "Bare-bones", Consumption = 1 };
+}
 
 public class PartyMember
 {

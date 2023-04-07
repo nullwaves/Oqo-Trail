@@ -1,0 +1,15 @@
+.pauseMenuButton {
+    font-size: 24px;
+    min-height: 50px;
+    background-color: rgba(219, 119, 148, 255);
+    border-left-color: rgba(255, 0, 0, 255);
+    border-right-color: rgba(255, 0, 0, 255);
+    border-top-color: rgba(255, 0, 0, 255);
+    border-bottom-color: rgba(255, 0, 0, 255);
+    color: rgba(0, 0, 0, 255);
+}
+
+.pauseMenuTitle {
+    font-size: 36px;
+    -unity-text-align: upper-left;
+}

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TMP_Text))]
-public class Pacing : MonoBehaviour
+public class HUD : MonoBehaviour
 {
     private GameManager manager;
     private TMP_Text text;
@@ -17,6 +17,6 @@ public class Pacing : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        text.text = $"Pace: {manager.Pace}\r\nRations: {manager.Rations}";
+        text.text = $"Pace: {manager.Pace.Name}\r\nRations: {manager.Rations.Name}";
     }
 }

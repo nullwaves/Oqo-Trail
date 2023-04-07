@@ -28,6 +28,12 @@ namespace Assets.UI
             Button btnResume = _root.Q<Button>("btnResume");
 
             btnResume.clicked += ButtonResume_Click;
+            _root.Q<Button>("btnSteady").clicked += ButtonSteady_Click;
+            _root.Q<Button>("btnStrenuous").clicked += ButtonStrenuous_Click;
+            _root.Q<Button>("btnGrueling").clicked += ButtonGrueling_Click;
+            _root.Q<Button>("btnFilling").clicked += ButtonFilling_Click;
+            _root.Q<Button>("btnMeager").clicked += ButtonMeager_Click;
+            _root.Q<Button>("btnBarebones").clicked += ButtonBarebones_Click;
         }
 
         public void ButtonResume_Click()
@@ -35,6 +41,36 @@ namespace Assets.UI
             _manager.IsPaused = false;
         }
 
+        public void ButtonSteady_Click()
+        {
+            _manager.Pace = Pacing.Steady;
+            _manager.IsPaused = false;
+        }
+        public void ButtonStrenuous_Click()
+        {
+            _manager.Pace = Pacing.Strenuous;
+            _manager.IsPaused = false;
+        }
+        public void ButtonGrueling_Click()
+        {
+            _manager.Pace = Pacing.Grueling;
+            _manager.IsPaused = false;
+        }
+        public void ButtonFilling_Click()
+        {
+            _manager.Rations = Rationing.Filling;
+            _manager.IsPaused = false;
+        }
+        public void ButtonMeager_Click()
+        {
+            _manager.Rations = Rationing.Meager;
+            _manager.IsPaused = false;
+        }
+        public void ButtonBarebones_Click()
+        {
+            _manager.Rations = Rationing.Barebones;
+            _manager.IsPaused = false;
+        }
         public void PauseStateChanged(bool state)
         {
             _root.style.display = stateMap[state];

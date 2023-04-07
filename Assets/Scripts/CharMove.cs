@@ -11,7 +11,7 @@ public class CharMove : MonoBehaviour
     {
         _manager = FindObjectOfType<GameManager>();
         controller = gameObject.AddComponent<CharacterController>();
-        playerSpeed = _manager.Pace;
+        playerSpeed = _manager.Pace.Speed;
     }
 
     // Update is called once per frame
@@ -36,7 +36,6 @@ public class CharMove : MonoBehaviour
                 {
                     _manager.IncreasePace();
                 }
-                playerSpeed = _manager.Pace;
             }
             Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             controller.Move(move * Time.deltaTime * playerSpeed);
