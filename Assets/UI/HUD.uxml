@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Container" style="min-width: 100%; min-height: 100%; -unity-font-definition: url(&apos;project://database/Assets/UI/CatCafe%20SDF.asset?fileID=11400000&amp;guid=c8fb4512df5d09a46ba296b3a5dac480&amp;type=2#CatCafe SDF&apos;); font-size: 20px; color: rgb(210, 210, 210);">
+        <ui:Label text="Time: 08:00 Month 1 Day 1" display-tooltip-when-elided="true" name="lblTime" />
+        <ui:Label text="Pace: Steady" display-tooltip-when-elided="true" name="lblPace" />
+        <ui:Label text="Rations: Filling" display-tooltip-when-elided="true" name="lblRations" />
+        <ui:VisualElement>
+            <ui:Label text="1: 100%" display-tooltip-when-elided="true" name="lblParty1" />
+            <ui:Label text="1: 100%" display-tooltip-when-elided="true" name="lblParty2" />
+            <ui:Label text="1: 100%" display-tooltip-when-elided="true" name="lblParty3" />
+            <ui:Label text="1: 100%" display-tooltip-when-elided="true" name="lblParty4" />
+            <ui:Label text="1: 100%" display-tooltip-when-elided="true" name="lblParty5" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -14,7 +14,7 @@
             <ui:VisualElement style="width: auto; flex-direction: column; align-items: center;">
                 <ui:Label text="Rations:" display-tooltip-when-elided="true" class="pauseMenuTitle" style="-unity-text-align: middle-left;" />
                 <ui:VisualElement style="align-items: center; width: 418px; justify-content: space-around; height: 121px; flex-direction: row;">
-                    <ui:Button text="Steady" display-tooltip-when-elided="true" name="btnFilling" class="pauseMenuButton" style="overflow: visible; flex-direction: column; align-items: center; flex-basis: auto;" />
+                    <ui:Button text="Filling" display-tooltip-when-elided="true" name="btnFilling" class="pauseMenuButton" style="overflow: visible; flex-direction: column; align-items: center; flex-basis: auto;" />
                     <ui:Button text="Meager" display-tooltip-when-elided="true" name="btnMeager" class="pauseMenuButton" style="align-items: center; -unity-text-align: middle-center; white-space: nowrap;" />
                     <ui:Button text="Bare-bones" display-tooltip-when-elided="true" name="btnBarebones" class="pauseMenuButton" style="align-items: center;" />
                 </ui:VisualElement>

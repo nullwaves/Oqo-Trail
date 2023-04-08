@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -54,6 +56,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public List<PartyMember> Party;
+
     public void IncreasePace()
     {
         if(Pace == Pacing.Strenuous) Pace = Pacing.Grueling;
@@ -73,7 +77,15 @@ public class GameManager : MonoBehaviour
         Rations = Rationing.Filling;
         Pace = Pacing.Steady;
         GameTime = new OqoDateTime(8 * OqoDateTime.MinutesPerHour);
-        GameTime.HoursAdvanced += HoursAdvanced;
+        GameTime.DaysAdvanced += DaysAdvanced;
+        Party = new List<PartyMember>()
+        {
+            new PartyMember("Arkas"),
+            new PartyMember("Guude"),
+            new PartyMember("Chad"),
+            new PartyMember("Drooo"),
+            new PartyMember("WormJess")
+        };
     }
 
     // Update is called once per frame
@@ -85,9 +97,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void HoursAdvanced(int hours)
+    private void DaysAdvanced(int days)
     {
-        Debug.LogError($"Time: {GameTime}");
+        for(int i = 0; i < days; i++)
+        {
+            foreach(var member in Party)
+            {
+                if(!member.IsDead)
+                {
+                    member.ProgressByDay(this);
+                }
+            }
+        }
     }
 
     public event BoolEventHandler PauseStateChange;
@@ -99,20 +120,33 @@ public class Pacing
 {
     public string Name;
     public float Speed;
+    public int HealthDamage;
 
-    public static Pacing Steady = new Pacing() { Name = "Steady", Speed = 2 };
-    public static Pacing Strenuous = new Pacing() { Name = "Strenuous", Speed = 4 };
-    public static Pacing Grueling = new Pacing() { Name = "Grueling", Speed = 8 };
+    public static Pacing Steady = new Pacing() { Name = "Steady", Speed = 2, HealthDamage = 0 };
+    public static Pacing Strenuous = new Pacing() { Name = "Strenuous", Speed = 4, HealthDamage = 1 };
+    public static Pacing Grueling = new Pacing() { Name = "Grueling", Speed = 8, HealthDamage = 2 };
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }
 
 public class Rationing
 {
     public string Name;
     public int Consumption;
+    public int HealthDamage;
+    public float IllnessChance;
 
-    public static Rationing Filling = new Rationing() { Name = "Filling", Consumption = 3 };
-    public static Rationing Meager = new Rationing() { Name = "Meager", Consumption = 2 };
-    public static Rationing Barebones = new Rationing() { Name = "Bare-bones", Consumption = 1 };
+    public static Rationing Filling = new Rationing() { Name = "Filling", Consumption = 3, HealthDamage = 0, IllnessChance = 0f };
+    public static Rationing Meager = new Rationing() { Name = "Meager", Consumption = 2, HealthDamage = 1, IllnessChance = 0.05f};
+    public static Rationing Barebones = new Rationing() { Name = "Bare-bones", Consumption = 1, HealthDamage = 2, IllnessChance = 0.1f };
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }
 
 public class PartyMember
@@ -129,10 +163,49 @@ public class PartyMember
         Health = 100;
         DaysSick = 0;
         DaysStarved = 0;
+        IsDead = false;
     }
 
-    public void ProgressByDay()
+    public void ProgressByDay(GameManager manager, bool resting = false)
     {
-        // Update health based on pace, sickness, and starvation
+        if(manager.Food < 1)
+        {
+            DaysStarved++;
+            Debug.LogWarning($"{Name} is starving!");
+        }
+        else
+        {
+            DaysStarved = 0;
+            manager.Food -= manager.Rations.Consumption;
+            if (manager.Food < 0) manager.Food = 0;
+        }
+        Health -= manager.Rations.HealthDamage + DaysStarved * 10;
+        if (!resting)
+        {
+            Health -= manager.Pace.HealthDamage;
+            if(DaysSick > 0 || DaysStarved > 0)
+            {
+                DaysSick++;
+            }
+            else if (UnityEngine.Random.value < manager.Rations.IllnessChance + (Health / 400))
+            {
+                DaysSick++;
+                Debug.LogWarning($"{Name} has dysentery!");
+            }
+        }
+        else // Resting
+        {
+            DaysSick = DaysSick > 0 ? DaysSick - 1:0; // Reduce Illness
+        }
+        if(Health <= 0)
+        {
+            IsDead = true;
+            Debug.LogWarning($"{Name} has died!");
+        }
+    }
+
+    public override string ToString()
+    {
+        return Name;
     }
 }
