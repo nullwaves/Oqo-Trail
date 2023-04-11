@@ -195,6 +195,7 @@ public class PartyMember
         }
         else // Resting
         {
+            Health += 5;
             DaysSick = DaysSick > 0 ? DaysSick - 1:0; // Reduce Illness
         }
         if(Health <= 0)
